@@ -34,11 +34,26 @@ form input {
   min-width: 30%;
 }
 
+form select {
+  min-width: 60%;
+  outline: none;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+
+
+
 form button {
   background: rgb(102, 117, 255);
   color: white;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 37%;
+  margin-left: 3%;
+  font-size: 1.8rem;
+  padding: 0.5rem;
 }
 
 form button:hover {
@@ -50,39 +65,98 @@ form button:focus {
   outline: none;
 }
 
-.todo-container {
+.form-list {
+  list-style: none;
+}
+
+.form-list li {
+  display: flex;
+  padding: 0.2rem;
+}
+
+
+
+.post-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.todo-list {
-  min-width: 50%;
+.post-list {
+  min-width: 40rem;
   list-style: none;
 }
 
-.todo {
-  margin: 0.5rem;
+.post {
+  margin: 3rem;
   background: white;
   color: black;
   font-size: 1.5rem;
-  display: flex;
+  display: block;
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease;
+  position: relative;
+  white-space: nowrap;
 }
 
-.todo li {
+.post li {
   flex: 1;
-  padding: 0rem 0.5rem;
+  padding: 1rem 1rem;
 }
 
-.delete-btn, .complete-btn {
+.post canvas {
+  padding: 1rem;
+  padding-bottom: 3rem;
+}
+
+.delete-btn, .like-btn {
   background: rgb(255, 73, 18);
   color: white;
   border: none;
-  padding: 1rem;
+  padding: 0.5rem;
   cursor: pointer;
   font-size: 1rem;
   outline: none;
+	position: absolute;
+  bottom: 0rem;
+  right: 0rem;
+  transition: all 0.2s ease;
 }
+
+
+
+.like-btn {
+  background: rgb(73, 204, 73);
+  right: 2rem;
+}
+
+.like-btn:hover {
+  background: white;
+  color: rgb(73, 204, 73);
+}
+
+.delete-btn:hover {
+  background: white;
+  color: rgb(255, 73, 18);
+}
+
+.canvas {
+  display: flex;
+}
+
+.fa-heart, .fa-trash {
+  pointer-events: none;
+}
+
+.liked {
+  background: white;
+  color: rgb(73, 204, 73);
+}
+
+
+.fall {
+  transform: translateX(10rem) rotateZ(20deg);
+  opacity: 0;
+}
+

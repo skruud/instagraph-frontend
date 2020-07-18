@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha512-xA6Hp6oezhjd6LiLZynuukm80f8BoZ3OpcEYaqKoCV3HKQDrYjDE1Gu8ocxgxoXmwmSzM4iqPvCsOkQNiu41GA==" crossorigin="anonymous" />
   <link rel="stylesheet" href="./style.css">
+  <script src="./node_modules/chart.js/dist/Chart.min.js"></script>
   <title>InstaGraph</title>
 </head>
 <body>
@@ -14,16 +15,40 @@
   </header>
 
   <form>
-    <input type="text" class="post-input">
-    <button class="post-button" type="submit">
-      <i class="fas fa-plus-circle"></i>
-    </button>
+    <ul class="form-list">
+      <li>
+        <input type="text" class="post-input" placeholder="Text">
+      </li>
+      <li>
+        <input type="text" class="post-input-x" placeholder="x-axis [e.g. 1,2,3]">
+      </li>
+      <li>
+        <input type="text" class="post-input-y" placeholder="y-axis [e.g. -5,64,31]">
+      </li>
+      <li>
+        <select name="chart-types" class="pick-chart">
+          <option value="line">Line Chart</option>
+          <option value="bar">Bar Chart</option>
+        </select>
+        
+        <button class="post-button" type="submit">
+          <i class="fas fa-plus-circle"></i>
+        </button>
+      </li>
+    </ul>
+    
+    
   </form>
   
+  <div class="preview-container">
+  </div>
+
   <div class="post-container">
     <ul class="post-list"></ul>
   </div>
 
-  <script src="./app.js"> </script>
+  <script src="./App.js"> </script>
+
+  
 </body>
 </html>
