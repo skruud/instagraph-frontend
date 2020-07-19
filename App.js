@@ -1,5 +1,7 @@
 
 //Selectors
+const form = document.querySelector('.form-list');
+const formButton = document.querySelector('.form-button');
 const postInput = document.querySelector('.post-input');
 const postInputX = document.querySelector('.post-input-x');
 const postInputY = document.querySelector('.post-input-y');
@@ -7,17 +9,19 @@ const postButton = document.querySelector('.post-button');
 const postList = document.querySelector('.post-list');
 const chartType = document.querySelector('.pick-chart');
 
-const postPreview = document.querySelector('.preview-container');
+const postPreview = document.querySelector('.preview-list');
 
 
 //Event Listeners
 //document.addEventListener('DOMContentLoaded', getPostList);
+formButton.addEventListener('click', buttonsCheck);
 postButton.addEventListener('click', addPost);
 postList.addEventListener('click', buttonsCheck);
 //filterOption.addEventListener('click', filterPosts);
 postInput.addEventListener('click', updatePreview);
-
-
+postInputX.addEventListener('click', updatePreview);
+postInputY.addEventListener('click', updatePreview);
+chartType.addEventListener('change', updatePreview);
 
 
 //Functions
@@ -29,7 +33,7 @@ async function updatePreview(event) {
 
   
   //Post DIV
-  const postDiv = document.createElement('div');
+  const postDiv = document.createElement('li');
   postDiv.classList.add('post');
 
   //Create LI
@@ -75,6 +79,7 @@ async function updatePreview(event) {
             }]
         },
         options: {
+          title:  { display: true, text: 'PREVIEW' },
           legend: { display: false },
           scales: {
             yAxes: [{
@@ -102,46 +107,14 @@ async function updatePreview(event) {
   postDiv.appendChild(deleteButton);
 
   //Append to post list
-  postPreview = postDiv;
+  if (postPreview.childNodes[0] !== undefined) {
+    postPreview.removeChild(postPreview.childNodes[0]);
+  }
+  postPreview.appendChild(postDiv);
 
-  //Clear postInput
-  postInput.value = "";
-  postInputX.value = "";
-  postInputY.value = "";
+  
 }
 
-function buttonsCheck(e) {
-  const button = e.target;
-
-  //Check mark
-  if (button.classList[0] === 'like-btn') {
-    const postItem = button.parentElement;
-    const id = postItem.childNodes[1].innerText;
-
-    console.log(postItem);
-    console.log(postItem.childNodes);
-    postItem.childNodes[3].classList.toggle('liked');
-    if (postItem.classList.contains('liked')) {
-      //putPost(id, true);
-    } 
-    else {
-      //putPost(id, false);
-    }
-  }
-  //Delete post
-  else if (button.classList[0] === 'delete-btn') {
-    const postItem = button.parentElement;
-    
-    console.log('DELETED');
-    //Animation
-    postItem.classList.add('fall');
-    postItem.addEventListener('transitionend', function() {
-      postItem.remove();
-    })
-    const id = postItem.childNodes[1].innerText;
-    //deletePost(id);
-  }
-}
 
 async function addPost(event) {
 
@@ -229,11 +202,12 @@ async function addPost(event) {
   postInput.value = "";
   postInputX.value = "";
   postInputY.value = "";
+  
+  if (postPreview.childNodes[0] !== undefined) postPreview.removeChild(postPreview.childNodes[0]);
 }
 
 function buttonsCheck(e) {
   const button = e.target;
-
   //Check mark
   if (button.classList[0] === 'like-btn') {
     const postItem = button.parentElement;
@@ -261,6 +235,21 @@ function buttonsCheck(e) {
     })
     const id = postItem.childNodes[1].innerText;
     //deletePost(id);
+  }
+  //Open form
+  else if (button.classList[0] === 'form-button') {
+    
+    if (form.style.display === 'block') {
+      form.style.display = 'none';
+      button.innerHTML = '<i class="fas fa-plus-square"></i>';
+      if (postPreview.childNodes[0] !== undefined) {
+        postPreview.removeChild(postPreview.childNodes[0]);
+      }
+    }
+    else {
+      form.style.display = 'block';
+      button.innerHTML = '<i class="fas fa-minus-square"></i>';
+    }
   }
 }
 
